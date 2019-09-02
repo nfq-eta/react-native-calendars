@@ -10,7 +10,7 @@ import {CHANGE_MONTH_LEFT_ARROW, CHANGE_MONTH_RIGHT_ARROW} from '../../testIDs';
 
 class CalendarHeader extends Component {
   static displayName = 'IGNORE';
-  
+
   static propTypes = {
     theme: PropTypes.object,
     hideArrows: PropTypes.bool,
@@ -22,7 +22,8 @@ class CalendarHeader extends Component {
     hideDayNames: PropTypes.bool,
     weekNumbers: PropTypes.bool,
     onPressArrowLeft: PropTypes.func,
-    onPressArrowRight: PropTypes.func
+    onPressArrowRight: PropTypes.func,
+    onPressMonth: PropTypes.func
   };
 
   static defaultProps = {
@@ -88,7 +89,7 @@ class CalendarHeader extends Component {
     let leftArrow = <View />;
     let rightArrow = <View />;
     let weekDaysNames = weekDayNames(this.props.firstDay);
-    const {testID} = this.props;
+    const {testID, onPressMonth} = this.props;
 
     if (!this.props.hideArrows) {
       leftArrow = (
@@ -132,12 +133,17 @@ class CalendarHeader extends Component {
       <View style={this.props.style}>
         <View style={this.style.header}>
           {leftArrow}
-          <View style={{ flexDirection: 'row' }}>
+
+          <TouchableOpacity
+            style={{ flexDirection: 'row' }}
+            onPress={onPressMonth}
+          >
             <Text allowFontScaling={false} style={this.style.monthText} accessibilityTraits='header'>
               {this.props.month.toString(this.props.monthFormat)}
             </Text>
             {indicator}
-          </View>
+          </TouchableOpacity>
+
           {rightArrow}
         </View>
         {
@@ -145,12 +151,12 @@ class CalendarHeader extends Component {
           <View style={this.style.week}>
             {this.props.weekNumbers && <Text allowFontScaling={false} style={this.style.dayHeader}></Text>}
             {weekDaysNames.map((day, idx) => (
-              <Text 
-                allowFontScaling={false} 
-                key={idx} 
-                accessible={false} 
-                style={this.style.dayHeader} 
-                numberOfLines={1} 
+              <Text
+                allowFontScaling={false}
+                key={idx}
+                accessible={false}
+                style={this.style.dayHeader}
+                numberOfLines={1}
                 importantForAccessibility='no'
               >
                 {day}
