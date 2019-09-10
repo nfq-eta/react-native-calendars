@@ -81,7 +81,11 @@ class Calendar extends Component {
     /** Handler which gets executed when press month title. */
     onPressMonth: PropTypes.func,
     /** Style passed to the header month container */
-    styleMonthContainer: ViewStyle,
+    styleMonthContainer: PropTypes.any,
+    /** content before month title */
+    beforeMonthTitle: PropTypes.any,
+    /** content after month title */
+    afterMonthTitle: PropTypes.any,
   };
 
   constructor(props) {
@@ -278,6 +282,8 @@ class Calendar extends Component {
           onPressArrowRight={this.props.onPressArrowRight}
           onPressMonth={this.props.onPressMonth}
           styleMonthContainer={this.props.styleMonthContainer}
+          beforeMonthTitle={this.props.beforeMonthTitle}
+          afterMonthTitle={this.props.afterMonthTitle}
         />
         <View style={this.style.monthView}>{weeks}</View>
       </View>);

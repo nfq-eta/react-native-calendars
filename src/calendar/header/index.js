@@ -23,7 +23,9 @@ class CalendarHeader extends Component {
     onPressArrowLeft: PropTypes.func,
     onPressArrowRight: PropTypes.func,
     onPressMonth: PropTypes.func,
-    styleMonthContainer: ViewStyle,
+    styleMonthContainer: PropTypes.any,
+    beforeMonthTitle: PropTypes.any,
+    afterMonthTitle: PropTypes.any,
   };
 
   static defaultProps = {
@@ -141,9 +143,14 @@ class CalendarHeader extends Component {
             ]}
             onPress={onPressMonth}
           >
+            {this.props.beforeMonthTitle}
+
             <Text allowFontScaling={false} style={this.style.monthText} accessibilityTraits='header'>
               {this.props.month.toString(this.props.monthFormat)}
             </Text>
+
+            {this.props.afterMonthTitle}
+
             {indicator}
           </TouchableOpacity>
 
