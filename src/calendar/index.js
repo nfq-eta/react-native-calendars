@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ViewPropTypes} from 'react-native';
+import {View, ViewPropTypes, ViewStyle} from 'react-native';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
 
@@ -78,8 +78,10 @@ class Calendar extends Component {
     onPressArrowRight: PropTypes.func,
     /** Style passed to the header */
     headerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
-  /** Handler which gets executed when press month title. */
+    /** Handler which gets executed when press month title. */
     onPressMonth: PropTypes.func,
+    /** Style passed to the header month container */
+    styleMonthContainer: ViewStyle,
   };
 
   constructor(props) {
@@ -275,6 +277,7 @@ class Calendar extends Component {
           onPressArrowLeft={this.props.onPressArrowLeft}
           onPressArrowRight={this.props.onPressArrowRight}
           onPressMonth={this.props.onPressMonth}
+          styleMonthContainer={this.props.styleMonthContainer}
         />
         <View style={this.style.monthView}>{weeks}</View>
       </View>);

@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, ViewStyle, StyleSheet} from 'react-native';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import XDate from 'xdate';
 import PropTypes from 'prop-types';
 import styleConstructor from './style';
 import {weekDayNames} from '../../dateutils';
 import {CHANGE_MONTH_LEFT_ARROW, CHANGE_MONTH_RIGHT_ARROW} from '../../testIDs';
-
 
 class CalendarHeader extends Component {
   static displayName = 'IGNORE';
@@ -23,7 +22,8 @@ class CalendarHeader extends Component {
     weekNumbers: PropTypes.bool,
     onPressArrowLeft: PropTypes.func,
     onPressArrowRight: PropTypes.func,
-    onPressMonth: PropTypes.func
+    onPressMonth: PropTypes.func,
+    styleMonthContainer: ViewStyle,
   };
 
   static defaultProps = {
@@ -135,7 +135,10 @@ class CalendarHeader extends Component {
           {leftArrow}
 
           <TouchableOpacity
-            style={{ flexDirection: 'row' }}
+            style={[
+              styles.row,
+              this.props.styleMonthContainer,
+            ]}
             onPress={onPressMonth}
           >
             <Text allowFontScaling={false} style={this.style.monthText} accessibilityTraits='header'>
@@ -170,3 +173,9 @@ class CalendarHeader extends Component {
 }
 
 export default CalendarHeader;
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+  },
+});
